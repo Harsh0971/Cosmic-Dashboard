@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cosmic-Dashboard Nasa-Explorer</title>
+  </head>
+  <body>
+    <header>
+      <!-- Nav Bar and header -->
+      <h1>Cosmic Dashboard</h1>
+      <p>
+        Explore real-time imagery and astronomical telemetry powered by NASA
+        Open APIs
+      </p>
+      <nav aria-label="Main Navbar">
+        <button type="button" id="tab-pod" class="nav-tab active">
+          Picture of the Day
+        </button>
+        <button type="button" id="tab-rover" class="nav-tab">
+          Mars Rovers
+        </button>
+        <button type="button" id="tab-obj" class="nav-tab">
+          Near Earth Objects
+        </button>
+      </nav>
+    </header>
+    <main>
+      <section id="pod-section" aria-labelledby="pod-heading">
+        <h2 id="pod-heading">Astronomy Picture of the Day</h2>
+        <!-- Data selection form -->
+        <form id="pod-form">
+          <label for="pod-date">Select Date:</label>
+          <input type="date" id="pod-date" name="pod-date" min="1995-06-16" />
+          <button type="submit">Fetch Pictures</button>
+        </form>
+        <!-- content display -->
+        <article id="pod-display">
+          <div id="pod-media-container"></div>
+          <!-- theory details -->
+          <div id="pod-details">
+            <h3 id="pod-title">select date or load image for today</h3>
+            <p id="pod-meta">
+              <time id="pod-date-display"></time>
+              <span id="pod-copyright"></span>
+            </p>
+            <p id="pod-explanation"></p>
+          </div>
+        </article>
+      </section>
+      <!-- section:2 Mars rover's Photos -->
+      <section id="mars-section" aria-labelledby="mars-heading" hidden>
+        <h2 id="mars-heading">Mars Rover Imagery</h2>
+        <form id="rover-form">
+          <lable for="rover-select">Rover:</lable>
+          <select id="rover-select" name="rover">
+            <option value="curiosity" selected>curiosity</option>
+            <option value="preserverance">preserverance</option>
+            <option value="opportunity">opportunity</option>
+            <option value="spirit">spirit</option>
+          </select>
+          <label for="sol-input"
+            >Martian sol(DAy)
+            <input
+              type="number"
+              id="sol-input"
+              name="sol"
+              min="0"
+              value="1000"
+              required
+            />
+          </label>
+          <label for="camera-select">Camera angle selection:</label>
+          <select name="camera" id="camera-select">
+            <option value="all">All Camera</option>
+            <option value="fhaz">Front Hazard Avoidence Camera</option>
+            <option value="rhaz">Rear Hazard Avoidence Camera</option>
+            <option value="mast">Mast Camera(MAST)</option>
+            <option value="chemcam">
+              Chemistery & Camera Complex(CHEMCAM)
+            </option>
+            <option value="mahli">Mars Hand Lens Imager(MAHLI)</option>
+            <option value="mardi">Mars Desent Imager(MARDI)</option>
+            <option value="navcam">Navigation Camera</option>
+          </select>
+          <button type="submit">Explore Mars Photos</button>
+        </form>
+        <!-- photo grid display -->
+        <div id="rover-gallery" aria-live="polite">
+          <!-- photo card will be displayed here -->
+        </div>
+      </section>
+
+      <!-- Section 3: Near Earth asteroid tracker(Neows) -->
+      <section id="neow-section" aria-labelledby="neow-heading" hidden>
+        <h2 id="neow-heading">Near-Earth Asteroid Tracker</h2>
+        <!-- Filter & sort form -->
+        <form id="neow-form">
+          <fieldset>
+            <legend>Search Window(MAX 7 Days):</legend>
+            <label for="neow-start-date">Start Date:</label>
+            <input
+              type="date"
+              name="start-date"
+              id="neow-start-date"
+              required
+            />
+            <label for="neow-end-date">End Date:</label>
+            <input type="date" name="end-date" id="neow-end-date" required />
+          </fieldset>
+
+          <fieldset>
+            <legend>Filter & Sort</legend>
+            <label for="hazard-filter">
+              <input type="checkbox" id="hazard-filter" name="hazard-only" />
+              Show Potentially Hazardous Only
+            </label>
+
+            <label for="sort-selection">Sort By:</label>
+            <select name="sort_by" id="sort-selection">
+              <option value="date-asc">Date (Earliest to Latest)</option>
+              <option value="distance-asc">Closest Apporach(Descending)</option>
+              <option value="diameter-desc">Largest Estimeted Size</option>
+              <option value="speed-desc">Fastest Relative Velocity</option>
+            </select>
+          </fieldset>
+
+          <button type="submit">Scan for Asteroids</button>
+        </form>
+        <!-- content display -->
+        <div id="neow-photos" aria-live="polite">
+          <!-- Asteroid photos will be displayed here -->
+        </div>
+      </section>
+      <!-- main ends here -->
+    </main>
+    <!-- Mars photo gallery modal -->
+    <dialog id="photo-modal" for="modal-caption">
+      <div class="modal-content">
+        <img id="modal-img" src="" alt="Enlarged Mars Rover Capture" />
+        <p id="modal-caption"></p>
+        <button type="button" id="modal-close-btn" autofocus>Close</button>
+      </div>
+    </dialog>
+  </body>
+</html>
